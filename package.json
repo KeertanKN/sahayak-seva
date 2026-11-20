@@ -1,0 +1,21 @@
+{
+  "name": "sahayak-seva",
+  "version": "1.0.0",
+  "description": "Universal Multilingual Citizen Assistance & Emergency Access Portal",
+  "main": "server.py",
+  "scripts": {
+    "start": "python3 server.py"
+  },
+  "keywords": [
+    "accessibility",
+    "multilingual",
+    "healthcare",
+    "civic-tech",
+    "emergency",
+    "a11y",
+    "sqlite",
+    "wcag-aaa"
+  ],
+  "author": "Sahayak Seva Project",
+  "license": "MIT"
+}

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-contrast="normal">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="Sahayak Seva - Multilingual, accessible citizen assistance portal for healthcare, government and civic services, and safety emergency help." />
+  <meta name="theme-color" content="#0284c7" />
+  <title>Sahayak Seva - Citizen Help & Emergency Access Portal</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- Skip link for screen reader and keyboard accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to Main Content</a>
+
+  <!-- Top Universal Emergency Banner -->
+  <div class="emergency-top-banner" role="alert">
+    <div>
+      <span aria-hidden="true">🚨</span>
+      <strong id="top-banner-text">Need immediate police, fire, or medical rescue?</strong>
+    </div>
+    <a href="tel:112" class="sos-call-btn" id="banner-sos-btn" aria-label="Call 112 National Emergency">
+      <span aria-hidden="true">📞</span>
+      <span id="top-banner-sos-label">Call 112 (National Emergency)</span>
+    </a>
+  </div>
+
+  <!-- Accessibility & Configuration Top Bar -->
+  <div class="top-accessibility-bar" role="region" aria-label="Accessibility and Regional Settings">
+    
+    <!-- Accessibility Controls -->
+    <div class="accessibility-controls">
+      <!-- Database Connection Status Badge -->
+      <span id="db-status-badge" class="badge badge-health" style="font-size: 11px; padding: 4px 10px;" title="Connected to sahayak.db SQLite Database">
+        🗄️ SQLite Database Connected
+      </span>
+
+      <!-- High Contrast Toggle -->
+      <button class="control-pill" id="toggle-contrast-btn" aria-label="Toggle High Contrast Mode">
+        <span aria-hidden="true">👁️</span>
+        <span>High Contrast</span>
+      </button>
+
+      <!-- Font Size Scaling -->
+      <div style="display: flex; align-items: center; gap: 4px;">
+        <span style="font-weight: 600;" aria-hidden="true">Size:</span>
+        <div class="font-size-group" role="group" aria-label="Text Size Controls">
+          <button class="font-size-btn active" data-scale="1.0" title="Default Text Size (100%)">A</button>
+          <button class="font-size-btn" data-scale="1.15" title="Large Text Size (115%)">A+</button>
+          <button class="font-size-btn" data-scale="1.30" title="Extra Large Text Size (130%)">A++</button>
+          <button class="font-size-btn" data-scale="1.45" title="Maximum Text Size (145%)">A+++</button>
+        </div>
+      </div>
+
+      <!-- Text-to-speech audio reader -->
+      <button class="control-pill" id="toggle-tts-btn" aria-label="Read Page Aloud with Voice Assistant">
+        <span aria-hidden="true">🔊</span>
+        <span>Read Aloud</span>
+      </button>
+    </div>
+
+    <!-- Region & Language Selectors -->
+    <div class="header-actions">
+      <!-- Region Selector -->
+      <div class="select-wrapper">
+        <label for="app-region-select" class="sr-only">Select State or Region</label>
+        <span class="icon-prefix" aria-hidden="true">📍</span>
+        <select id="app-region-select" aria-label="Select State or Region">
+          <!-- Populated dynamically via config.js -->
+        </select>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="select-wrapper">
+        <label for="app-language-select" class="sr-only">Select Language</label>
+        <span class="icon-prefix" aria-hidden="true">🌐</span>
+        <select id="app-language-select" aria-label="Select Language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main App Header & Brand -->
+  <header class="app-header" role="banner">
+    <div class="nav-container">
+      <div class="app-brand">
+        <div class="app-logo-icon" aria-hidden="true">🏛️</div>
+        <div class="app-brand-titles">
+          <span class="app-brand-title" id="app-title-text">Sahayak Seva</span>
+          <span class="app-brand-subtitle" id="app-subtitle-text">Citizen Help & Emergency Access Portal</span>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: var(--space-2);">
+        <button class="btn btn-sm btn-emergency" id="header-sos-btn" onclick="window.appInstance?.safetyService?.openSOSModal()" aria-label="Emergency SOS Alert">
+          🆘 SOS Alert
+        </button>
+      </div>
+    </div>
+
+    <!-- Desktop Navigation Tabs -->
+    <nav class="main-nav" role="navigation" aria-label="Primary Navigation">
+      <div class="nav-tabs-wrapper">
+        <button class="nav-tab-btn active" data-view="home" aria-current="page">
+          🏠 Home
+        </button>
+        <button class="nav-tab-btn" data-view="health">
+          🩺 Healthcare
+        </button>
+        <button class="nav-tab-btn" data-view="civic">
+          🏛️ Civic & Govt
+        </button>
+        <button class="nav-tab-btn emergency-tab" data-view="safety">
+          🚨 Safety & SOS
+        </button>
+        <button class="nav-tab-btn" data-view="vault">
+          🔒 Health Vault
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main id="main-content" class="main-wrapper" role="main" tabindex="-1">
+    <div id="content-area">
+      <!-- Dynamically rendered by app.js -->
+    </div>
+  </main>
+
+  <!-- Global Modal Dialog Container -->
+  <div class="modal-backdrop" id="global-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content" id="global-modal-content">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation (Always accessible on mobile & small tablets) -->
+  <nav class="mobile-bottom-nav" role="navigation" aria-label="Mobile Bottom Navigation">
+    <ul class="bottom-nav-list">
+      <li class="bottom-nav-item">
+        <button class="bottom-nav-btn active" data-view="home" aria-label="Home">
+          <span class="icon" aria-hidden="true">🏠</span>
+          <span>Home</span>
+        </button>
+      </li>
+      <li class="bottom-nav-item">
+        <button class="bottom-nav-btn" data-view="health" aria-label="Healthcare">
+          <span class="icon" aria-hidden="true">🩺</span>
+          <span>Health</span>
+        </button>
+      </li>
+      <li class="bottom-nav-item">
+        <button class="bottom-nav-btn" data-view="civic" aria-label="Civic & Government Services">
+          <span class="icon" aria-hidden="true">🏛️</span>
+          <span>Civic</span>
+        </button>
+      </li>
+      <li class="bottom-nav-item">
+        <button class="bottom-nav-btn" data-view="safety" aria-label="Safety & SOS Emergency">
+          <span class="icon" aria-hidden="true">🚨</span>
+          <span>Safety</span>
+        </button>
+      </li>
+      <li class="bottom-nav-item">
+        <button class="bottom-nav-btn" data-view="chatbot" aria-label="AI Assistant Mitra">
+          <span class="icon" aria-hidden="true">💬</span>
+          <span>Mitra AI</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Accessible Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>🏛️ Sahayak Seva Portal</h4>
+        <p style="font-size: var(--text-xs); line-height: 1.6;">
+          An accessible public utility application designed for all ages, languages, and abilities. Providing transparent guidance for official government cards, emergency dispatch, and community grievance resolution.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h4>🚨 24x7 Emergency Helplines</h4>
+        <ul class="footer-links" style="font-size: var(--text-xs);">
+          <li>• <strong>112</strong> - National Unified Emergency</li>
+          <li>• <strong>108 / 102</strong> - Emergency Medical & Ambulance</li>
+          <li>• <strong>100</strong> - Police Control Room</li>
+          <li>• <strong>1091 / 181</strong> - Women in Distress Helpline</li>
+          <li>• <strong>1098</strong> - Childline</li>
+          <li>• <strong>14567</strong> - Elderline (Senior Citizen Helpline)</li>
+          <li>• <strong>1930</strong> - National Cyber Financial Crime</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>🔒 Privacy & Sovereignty</h4>
+        <p style="font-size: var(--text-xs); line-height: 1.6;">
+          Patient medical histories are stored using end-to-end client-side encryption. Healthcare providers may only view records when explicit 24-hour consent is granted by the patient.
+        </p>
+        <p style="font-size: var(--text-xs); color: var(--color-health); font-weight: 700;">
+          ✓ Fully Compliant with ABDM & Digital Personal Data Protection (DPDP) Guidelines
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 Sahayak Seva Portal • Designed for Universal Accessibility (WCAG 2.1 AAA Compliant)
+      </div>
+      <div>
+        Available in 8 Indian Languages • Optimized for Mobile, Tablet & Desktop
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
